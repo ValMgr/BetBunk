@@ -4,8 +4,8 @@
 
 body {
     @apply dark:bg-slate-800 dark:text-white;
+    min-height: 100vh;
 }
-
 
 
 @layer components {
@@ -32,4 +32,17 @@ body {
         @apply rounded mx-3 bg-gray-200 border-transparent text-yellow-400
         focus:border-transparent focus:bg-gray-200 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500;
     }
+}
+
+.cardQuizz {
+ @apply flex flex-row justify-around items-center m-3 bg-slate-100 rounded-lg w-fit gap-3.5 max-h-40 pr-8;
+}
+.cardQuizz img{
+ @apply rounded-l-lg w-24 h-24 object-cover;
+}
+.cardQuizz h3{
+ @apply text-lg font-bold;
+}
+.cardQuizz p{
+ @apply text-base ;
 }

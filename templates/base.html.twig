@@ -14,6 +14,35 @@
         {% endblock %}
     </head>
     <body>
+        <header class="flex flex-row justify-between p-4 px-8 bg-slate-50 items-center shadow-md ">
+            <a href="/">
+                <img class="w-20 max-h-20" src="/img/logo.png" />
+            </a>
+            <nav>
+                <div class="space-x-4">
+                    <a href="/">Test 1</a>
+                    <a href="/">Test 2</a>
+                    <a href="/">Test 3</a>
+                </div>
+            </nav>
+        </header>
         {% block body %}{% endblock %}
+
+        <footer class="flex flex-row justify-evenly p-4 px-8 items-center bg-slate-50 drop-shadow sticky inset-x-0 bottom-0 border-t-2">
+            <div class="flex flex-col">
+                <a href="/">Copyright</a>
+                <a href="/">Test</a>
+            </div>
+            <div class="flex flex-col">
+                <a href="/">Contact</a>
+                <a href="/">Contact - Test</a>
+            </div>
+            <div>
+                <a href="/">
+                    <img class="w-20 max-h-20" src="/img/logo.png" />
+                </a>
+            </div>
+            
+        </footer>
     </body>
 </html>
