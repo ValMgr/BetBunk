@@ -243,3 +243,9 @@ dist
 # Support for Project snippet scope
 
 # End of https://www.toptal.com/developers/gitignore/api/symfony,node,visualstudiocode
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
