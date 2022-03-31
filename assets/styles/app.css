@@ -3,4 +3,33 @@
 @tailwind utilities;
 
 body {
+    @apply dark:bg-slate-800 dark:text-white;
+}
+
+
+
+@layer components {
+    .btn {
+        @apply px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-white rounded transition-all duration-300;
+    }
+
+    /** Form classes **/
+    .form-row {
+        @apply mb-2 flex gap-4;
+    }
+
+    .form-label {
+        @apply font-semibold w-1/4;
+    }
+
+    .form-field {
+        @apply rounded-md border-2 mt-1 mb-5 border-transparent flex-grow bg-gray-100 w-full block
+        focus:border-gray-500 focus:bg-white focus:ring-0
+        dark:text-black;
+    }
+
+    .form-checkbox {
+        @apply rounded mx-3 bg-gray-200 border-transparent text-yellow-400
+        focus:border-transparent focus:bg-gray-200 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500;
+    }
 }
