@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fc760118d1993f319bb09e9933e6686",
+    "content-hash": "890fdc311f96ae0645d15fd396a75478",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1960,75 +1960,6 @@
                 }
             ],
             "time": "2021-12-19T18:06:55+00:00"
-        },
-        {
-            "name": "mongodb/mongodb",
-            "version": "1.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mongodb/mongo-php-library.git",
-                "reference": "e4a7594ac4b31635fa77455c4038a7013024ba28"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mongodb/mongo-php-library/zipball/e4a7594ac4b31635fa77455c4038a7013024ba28",
-                "reference": "e4a7594ac4b31635fa77455c4038a7013024ba28",
-                "shasum": ""
-            },
-            "require": {
-                "ext-hash": "*",
-                "ext-json": "*",
-                "ext-mongodb": "^1.13.0",
-                "jean85/pretty-package-versions": "^1.2 || ^2.0.1",
-                "php": "^7.2 || ^8.0",
-                "symfony/polyfill-php80": "^1.19"
-            },
-            "require-dev": {
-                "doctrine/coding-standard": "^9.0",
-                "squizlabs/php_codesniffer": "^3.6",
-                "symfony/phpunit-bridge": "^5.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.12.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
-                "psr-4": {
-                    "MongoDB\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Andreas Braun",
-                    "email": "andreas.braun@mongodb.com"
-                },
-                {
-                    "name": "Jeremy Mikola",
-                    "email": "jmikola@gmail.com"
-                }
-            ],
-            "description": "MongoDB driver library",
-            "homepage": "https://jira.mongodb.org/browse/PHPLIB",
-            "keywords": [
-                "database",
-                "driver",
-                "mongodb",
-                "persistence"
-            ],
-            "support": {
-                "issues": "https://github.com/mongodb/mongo-php-library/issues",
-                "source": "https://github.com/mongodb/mongo-php-library/tree/1.12.0"
-            },
-            "time": "2022-03-23T20:18:39+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -11164,5 +11095,5 @@
         "ext-iconv": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
