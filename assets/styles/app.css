@@ -2,16 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply dark:bg-slate-800 dark:text-white;
-    position: relative;
-    min-height: 100vh;
-}
 
-main{
-    min-height: calc(100vh - 220px);
-}
+@layer base {
 
+    body {
+        @apply bg-white  text-black dark:bg-dark-800 dark:text-white;
+        position: relative;
+        min-height: 100vh;
+    }
+
+    main{
+        min-height: calc(100vh - 220px);
+    }
+}
 
 @layer components {
     .btn {
