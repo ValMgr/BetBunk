@@ -11,20 +11,37 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 
-
-// On page load or when changing themes, best to add inline in `head` to avoid FOUC
-if (localStorage.theme === 'dark' || 
-(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark')
-} else {
-    document.documentElement.classList.remove('dark')
+function docReady(fn){
+    if (document.readyState === "complete" || document.readyState === "interactive"){
+        setTimeout(fn, 1);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
 }
 
-// // Whenever the user explicitly chooses light mode
-// localStorage.theme = 'light'
+docReady(() => {
 
-// // Whenever the user explicitly chooses dark mode
-// localStorage.theme = 'dark'
+    if (localStorage.theme === 'dark' || 
+    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
 
-// // Whenever the user explicitly chooses to respect the OS preference
-// localStorage.removeItem('theme')
+    const darkModeToggle = document.querySelector('#dark-toggle');
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+
+    function toggleDarkMode(){
+        const currMode = ('theme' in localStorage) ? localStorage.theme : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (currMode === 'dark') {
+            localStorage.theme = 'light';
+            document.documentElement.classList.remove('dark');
+        }
+        else{
+            localStorage.theme = 'dark';
+            document.documentElement.classList.add('dark');
+        }
+    }
+
+});
+
