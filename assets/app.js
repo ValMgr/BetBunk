@@ -10,3 +10,46 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+
+function docReady(fn) {
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        setTimeout(fn, 1);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+}
+
+docReady(() => {
+
+    const darkModeToggle = document.querySelector('#dark-toggle');
+    darkModeToggle.addEventListener('click', toggleDarkMode.bind(darkModeToggle));
+
+    if (localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        darkModeToggle.children[0].classList.remove('hidden');
+        darkModeToggle.children[1].classList.add('hidden');
+        document.documentElement.classList.add('dark')
+    } else {
+        darkModeToggle.children[0].classList.add('hidden');
+        darkModeToggle.children[1].classList.remove('hidden');
+        document.documentElement.classList.remove('dark')
+    }
+
+    function toggleDarkMode() {
+        const currMode = ('theme' in localStorage) ? localStorage.theme : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (currMode === 'dark') {
+            localStorage.theme = 'light';
+            this.children[0].classList.add('hidden');
+            this.children[1].classList.remove('hidden');
+            document.documentElement.classList.remove('dark');
+        }
+        else {
+            localStorage.theme = 'dark';
+            this.children[0].classList.remove('hidden');
+            this.children[1].classList.add('hidden');
+            document.documentElement.classList.add('dark');
+        }
+    }
+
+});
+
