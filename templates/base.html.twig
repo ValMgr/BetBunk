@@ -30,9 +30,12 @@
                 </div>
             </nav>
         </header>
-        {% block body %}{% endblock %}
 
-        <footer class="flex flex-row justify-evenly p-4 px-8 items-center bg-slate-50 dark:bg-dark-500 drop-shadow relative inset-x-0 bottom-0 mt-5">
+        <main class="container py-5">
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer class="flex flex-row justify-evenly px-8 items-center bg-slate-50 dark:bg-dark-500 drop-shadow relative inset-x-0 bottom-0">
             <div class="flex flex-col">
                 <a href="/">Copyright</a>
                 <a href="/">Test</a>
@@ -41,7 +44,7 @@
                 <a href="/">Contact</a>
                 <a href="/">Contact - Test</a>
             </div>
-            <div>
+            <div class="p-2">
                 <a href="/">
                     <img class="w-20 max-h-20" src="/img/logo.png" />
                 </a>

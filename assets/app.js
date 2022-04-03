@@ -21,6 +21,7 @@ function docReady(fn) {
 
 docReady(() => {
 
+    setMinHeight();
     const darkModeToggle = document.querySelector('#dark-toggle');
     darkModeToggle.addEventListener('click', toggleDarkMode.bind(darkModeToggle));
 
@@ -49,6 +50,14 @@ docReady(() => {
             this.children[1].classList.add('hidden');
             document.documentElement.classList.add('dark');
         }
+    }
+
+    function setMinHeight() {
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
+        const main = document.querySelector('main');
+        const minHeight = window.innerHeight - header.offsetHeight - footer.offsetHeight;
+        main.style.minHeight = `${minHeight}px`;
     }
 
 });
