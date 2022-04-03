@@ -6,7 +6,7 @@
 @layer base {
 
     body {
-        @apply bg-white  text-black dark:bg-dark-800 dark:text-white
+        @apply bg-white  text-black dark:bg-dark-600 dark:text-white
         transition-all ease-in duration-200;
         position: relative;
         min-height: 100vh;
@@ -45,10 +45,10 @@
 
 @layer custom{
     .cardQuizz {
-     @apply flex flex-row justify-around items-center m-3 bg-slate-100 rounded-lg w-fit gap-3.5 max-h-40 pr-8;
+     @apply flex flex-row justify-around items-center m-3 bg-slate-100 dark:bg-dark-300 rounded-lg w-fit gap-3.5 max-h-40 pr-8;
     }
     .cardQuizz img{
-     @apply rounded-l-lg w-24 h-24 object-cover;
+     @apply rounded-l-lg w-24 h-24 object-cover max-h-32;
     }
     .cardQuizz h3{
      @apply text-lg font-bold;
