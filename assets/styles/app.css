@@ -12,9 +12,6 @@
         min-height: 100vh;
     }
 
-    main{
-        min-height: calc(100vh - 220px);
-    }
 }
 
 @layer components {
@@ -34,11 +31,11 @@
     .form-field {
         @apply rounded-md border-2 mt-1 mb-5 border-transparent flex-grow bg-gray-100 w-full block
         focus:border-gray-500 focus:bg-white focus:ring-0
-        dark:text-black;
+        dark:text-white dark:bg-dark-200;
     }
 
     .form-checkbox {
-        @apply rounded mx-3 bg-gray-200 border-transparent text-yellow-400
+        @apply rounded mx-3 bg-gray-200 dark:bg-dark-200 border-transparent text-yellow-400
         focus:border-transparent focus:bg-gray-200 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500;
     }
 }
@@ -55,5 +52,9 @@
     }
     .cardQuizz p{
      @apply text-base ;
+    }
+    .error{
+        @apply my-4;
+        color: red;
     }
 }
