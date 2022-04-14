@@ -2,6 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
 
+@layer base {
+
+    body {
+        @apply bg-white  text-black dark:bg-dark-600 dark:text-white
+        transition-all ease-in duration-200;
+        position: relative;
+        min-height: 100vh;
+    }
+
+}
+
+@layer components {
+    .btn {
+        @apply px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-white rounded duration-300;
+    }
+
+    /** Form classes **/
+    .form-row {
+        @apply mb-2 flex gap-4;
+    }
+
+    .form-label {
+        @apply font-semibold w-1/4;
+    }
+
+    .form-field {
+        @apply rounded-md border-2 mt-1 mb-5 border-transparent flex-grow bg-gray-100 w-full block
+        focus:border-gray-500 focus:bg-white focus:ring-0
+        dark:text-white dark:bg-dark-200;
+    }
+
+    .form-checkbox {
+        @apply rounded mx-3 bg-gray-200 dark:bg-dark-200 border-transparent text-yellow-400
+        focus:border-transparent focus:bg-gray-200 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500;
+    }
+}
+
+@layer custom{
+    .cardQuizz {
+     @apply flex flex-row justify-around items-center m-3 bg-slate-100 dark:bg-dark-300 rounded-lg w-fit gap-3.5 max-h-40 pr-8;
+    }
+    .cardQuizz img{
+     @apply rounded-l-lg w-24 h-24 object-cover max-h-32;
+    }
+    .cardQuizz h3{
+     @apply text-lg font-bold;
+    }
+    .cardQuizz p{
+     @apply text-base ;
+    }
+    .error{
+        @apply my-4;
+        color: red;
+    }
 }
