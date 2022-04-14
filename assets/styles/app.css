@@ -12,6 +12,12 @@
         min-height: 100vh;
     }
 
+    @media (min-width: 1536px) {
+        .container{
+            max-width: 1330px !important;
+        }
+    }
+
 }
 
 @layer components {
