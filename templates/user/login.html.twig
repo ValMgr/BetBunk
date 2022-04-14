@@ -18,6 +18,8 @@ endblock %} {% block body %}
 
     {# Redirect after login  #}
     <input type="hidden" name="_target_path" value="/account" />
+    {# CRSF Token #}
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
     <button class="btn" type="submit">Connexion</button>
 
