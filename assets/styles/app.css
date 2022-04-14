@@ -53,4 +53,8 @@
     .cardQuizz p{
      @apply text-base ;
     }
+    .error{
+        @apply my-4;
+        color: red;
+    }
 }

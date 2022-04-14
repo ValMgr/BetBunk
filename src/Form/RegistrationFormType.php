@@ -20,7 +20,6 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Adresse email',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a email',
@@ -28,7 +27,6 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('username', TextType::class, [
-                'label' => 'Nom d\'utilisateur',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a username',
@@ -44,8 +42,6 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
