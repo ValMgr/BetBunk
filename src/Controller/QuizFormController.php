@@ -16,13 +16,7 @@ use App\Entity\Quiz;
 
 class QuizFormController extends AbstractController
 {
-    #[Route('/quiz/form', name: 'QuizForm')]
-    public function index(): Response
-    {
-        return $this->render('quiz_form/index.html.twig', [
-            'controller_name' => 'QuizFormController',
-        ]);
-    }
+
     #[Route('/quiz/form/create', name: 'createQuiz')]
     public function createQuiz(Request $request): Response
     {
@@ -54,7 +48,7 @@ class QuizFormController extends AbstractController
             return $this->redirectToRoute('account');
         }
         
-        return $this->render('quiz_form/createQuiz.html.twig ', [
+        return $this->render('quiz/createQuiz.html.twig ', [
             'QuizForm' => $form->createView(),
         ]);
     }
