@@ -4,4 +4,56 @@
 
 {% block body %}
 
+    <div class="flex columns-2">
+
+        <div class="profil w-6/12">
+            <img class="profil-picture mb-5" src="{{ asset('img/profil.jpeg') }}" alt="profil">
+
+            <div class="profil-infos w-full">
+                <h2 class="font-medium text-lg">{{ user.username }}</h2>
+                <p>{{ user.email }}</p>
+                <hr class="my-5 border-b-2 border-black">
+                <p class="my-2">Niveau(x): {{level}}</p>
+                <div class="required_xp"> {{xp}} / {{xp_required}}  </div>
+            </div>
+        </div>
+
+
+        <div class="w-6/12">
+            <div class="last-played-quiz">
+                <h1 class="text-center">Derniers quiz joués</h1>
+                <div class="flex flex-col">
+                    {% for quiz in lastPlayedQuiz %}
+                        <div class="quiz-card">
+                            <div class="quiz-card-header">
+                                <h2>{{ quiz.title }}</h2>
+                                <p>{{ quiz.description }}</p>
+                            </div>
+                            <div class="quiz-card-footer">
+                                <a href="{{ path('quiz_play', {'id': quiz.id}) }}" class="btn btn-primary">Jouer</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="my-quizs">
+                <h1 class="text-center">Mes quizs</h1>
+                <div class="flex flex-col">
+                    {% for quiz in quizzes %}
+                        <div class="quiz-card">
+                            <a href="{{ path('quiz_show', {'id': quiz.id}) }}">
+                                <h2>{{ quiz.title }}</h2>
+                                <p>{{ quiz.description }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
 {% endblock %}

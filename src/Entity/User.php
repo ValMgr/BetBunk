@@ -35,6 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Quiz::class)]
     private $quizzes;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $experience;
+
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
@@ -148,6 +151,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $quiz->setUserId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getExperience(): ?int
+    {
+        return $this->experience;
+    }
+
+    public function setExperience(?int $experience): self
+    {
+        $this->experience = $experience;
 
         return $this;
     }

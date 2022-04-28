@@ -37,7 +37,7 @@ module.exports = {
         800: '#B36F00',
         900: '#995F00',
       },
-      bizantine: {
+      byzantine: {
         100: '#9767AA',
         200: '#864E9C',
         300: '#75358D',
