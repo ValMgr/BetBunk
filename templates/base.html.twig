@@ -30,6 +30,7 @@
                         <a href="/admin">Admin</a>
                     {% endif %}
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="/account">Mon profil</a>
                         <a href="/logout">Déconnexion</a>
                     {% else %}
                         <a href="/login">Connexion</a>

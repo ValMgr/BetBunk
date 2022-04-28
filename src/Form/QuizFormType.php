@@ -36,7 +36,24 @@ class QuizFormType extends AbstractType
                     ])
                 ],
             ])
-            ->add('image')
+            ->add('image', FileType::class, [
+                'label' => 'Miniature (PNG or JPG)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                            'image/bmp',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid thumbnails',
+                    ])
+                ],
+            ])
             ->add('note')
             ->add('time')
         ;

@@ -11,5 +11,8 @@
 <div class="example-wrapper">
 
     <p>Test</p>
+    {% for oneQuiz in quizzes %}
+        <p>{{ oneQuiz.name }}</p>
+    {% endfor %}
 </div>
 {% endblock %}
