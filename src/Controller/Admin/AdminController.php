@@ -10,9 +10,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 use App\Controller\AccountController;
-use App\Controller\Admin\UserCrudController;
+
 
 use App\Entity\User;
+use App\Entity\Quiz;
+use App\Entity\QuizText;
+use App\Entity\QuizCategory;
+use App\Entity\Category;
+use App\Entity\Question;
+
 
 class AdminController extends AbstractDashboardController
 {
@@ -49,10 +55,15 @@ class AdminController extends AbstractDashboardController
         // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
         return [
-            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
-            MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage'),
+            MenuItem::linkToDashboard('Dashboard', 'fa-solid fa-screwdriver-wrench'),
+            MenuItem::linktoRoute('Back to the website', 'fa fa-home', 'homepage'),
             MenuItem::section('Users'),
             MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
+            MenuItem::linkToCrud('Quiz', 'fa-solid fa-list', Quiz::class),
+            MenuItem::linkToCrud('QuizText', 'fa-solid fa-list', QuizText::class),
+            MenuItem::linkToCrud('QuizCategory', 'fa-solid fa-list', QuizCategory::class),
+            MenuItem::linkToCrud('Category', 'fa-solid fa-circle-question', Category::class),
+            MenuItem::linkToCrud('Question', 'fa-solid fa-circle-question', Question::class),
 
         ];
     }
