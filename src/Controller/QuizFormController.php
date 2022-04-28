@@ -87,14 +87,8 @@ class QuizFormController extends AbstractController
 
             return $this->redirectToRoute('QuizForm');
         }
-<<<<<<< HEAD
         
         return $this->render('quiz/createQuiz.html.twig ', [
-=======
-
-        // dd($quiz);
-        return $this->render('quiz_form/createQuiz.html.twig ', [
->>>>>>> 5aa859aed43499196dc2d12a00aa6e4f04dc883d
             'QuizForm' => $form->createView(),
         ]);
     }
