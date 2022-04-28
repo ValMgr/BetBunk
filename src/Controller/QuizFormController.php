@@ -22,7 +22,7 @@ use App\Entity\Quiz;
 class QuizFormController extends AbstractController
 {
 
-    #[Route('/quiz/form/create', name: 'createQuiz')]
+    #[Route('/quiz/create', name: 'createQuiz')]
     public function createQuiz(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
 

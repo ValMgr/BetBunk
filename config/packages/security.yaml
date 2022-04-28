@@ -38,6 +38,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/account, roles: ROLE_USER }
+        - { path: ^/quizz/create, roles: ROLE_USER }
 
 when@test:
     security:
