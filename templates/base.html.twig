@@ -26,6 +26,9 @@
                 <div class="space-x-4">
                     <a href="/quiz/form">Quiz</a>
                     <a href="/">Test 2</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="/admin">Admin</a>
+                    {% endif %}
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <a href="/logout">Déconnexion</a>
                     {% else %}
