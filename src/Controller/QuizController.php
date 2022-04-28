@@ -8,16 +8,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class QuizController extends AbstractController
 {
-    #[Route('/quiz', name: 'app_quiz')]
+    #[Route('/quiz', name: 'quizzes')]
     public function index(): Response
     {
         return $this->render('quiz/index.html.twig', [
             'controller_name' => 'QuizController',
         ]);
     }
-    
-    #[Route('/quiz/{id}', name: 'showQuiz')]
-    public function show(ManagerRegistry $doctrine, int $id): Response
+
+    #[Route('/quiz/{id}', name: 'quiz')]
+    public function getQuiz(ManagerRegistry $doctrine, int $id): Response
     {
         $quiz = $doctrine->getRepository(Quiz::class)->find($id);
 
@@ -28,7 +28,7 @@ class QuizController extends AbstractController
         }
 
         dd($quiz);
-        return $this->render('quiz_form/index.html.twig ', [
+        return $this->render('quiz/index.html.twig ', [
             'quiz' => $quiz,
         ]);
     }
