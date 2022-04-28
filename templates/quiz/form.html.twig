@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello QuizFormController!{% endblock %}
+
+{% block body %}
+<main class="container py-5">
+ <div>
+    {{ form_start(QuizForm) }}
+        {{ form_row(QuizForm.title, {
+          attr: { class: "form-field" },
+          label: 'Titre* : '
+        }) }}
+        {{ form_row(QuizForm.description, {
+          attr: { class: "form-field" },
+          label: 'Description* : '
+        }) }}
+        {{ form_row(QuizForm.thumbnail, {
+          attr: { class: "form-field" },
+          label: 'Miniature* : '
+        }) }}
+        {{ form_row(QuizForm.image, {
+          attr: { class: "form-field" },
+          label: 'Image : '
+        }) }}
+        {{ form_row(QuizForm.note, {
+          attr: { class: "form-field" },
+          label: 'Note* : '
+        }) }}
+        {{ form_row(QuizForm.time, {
+          attr: { class: "form-field" },
+          label: 'Temps* : '
+        }) }}
+        <button class="btn btn-primary">Publier un quiz</button>
+    {{ form_end(QuizForm) }}
+ 
+ </div>
+
+</main>
+{% endblock %}
