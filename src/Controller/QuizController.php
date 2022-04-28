@@ -15,4 +15,21 @@ class QuizController extends AbstractController
             'controller_name' => 'QuizController',
         ]);
     }
+    
+    #[Route('/quiz/{id}', name: 'showQuiz')]
+    public function show(ManagerRegistry $doctrine, int $id): Response
+    {
+        $quiz = $doctrine->getRepository(Quiz::class)->find($id);
+
+        if (!$quiz) {
+            throw $this->createNotFoundException(
+                'No quiz for id '.$id
+            );
+        }
+
+        dd($quiz);
+        return $this->render('quiz_form/index.html.twig ', [
+            'quiz' => $quiz,
+        ]);
+    }
 }
