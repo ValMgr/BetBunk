@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\QuizRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 // use Entity\QuizCategory;
 // use Entity\QuizText;
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\InheritanceType("SINGLE_TABLE")]
 #[ORM\DiscriminatorColumn(name:"type", type:"string", length:2)]
 #[ORM\DiscriminatorMap(["QC"=>QuizCategory::class, "QT"=>QuizText::class])]
-
+#[Vich\Uploadable] 
 class Quiz
 {
     #[ORM\Id]
@@ -28,10 +29,22 @@ class Quiz
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Vich\UploadableField(mapping: 'thumbnails', fileNameProperty: 'thumbnailName', size: 'thumbnailSize')]
     private $thumbnail;
 
+    #[ORM\Column(type: 'string')]
+    private $thumbnailName;
+    #[ORM\Column(type: 'integer')]
+    private $thumbnailSize;
+
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName', size: 'imageSize')]
     private $image;
+
+    #[ORM\Column(type: 'string')]
+    private $imageName;
+    #[ORM\Column(type: 'integer')]
+    private $imageSize;
 
     #[ORM\Column(type: 'integer')]
     private $note;
@@ -80,7 +93,9 @@ class Quiz
     public function setThumbnail(string $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
-
+        if (null !== $thumbnail) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
         return $this;
     }
 
@@ -92,7 +107,9 @@ class Quiz
     public function setImage(?string $image): self
     {
         $this->image = $image;
-
+        if (null !== $image) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
         return $this;
     }
 

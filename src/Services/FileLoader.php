@@ -26,7 +26,7 @@ class FileLoader
             throw new FileException($e->getMessage());
         }
 
-        return $fileUID;
+        return $directory . $fileUID;
     }
 
 }

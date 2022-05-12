@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
+#[Vich\Uploadable] 
 class Question
 {
     #[ORM\Id]
@@ -14,7 +16,13 @@ class Question
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName', size: 'imageSize')]
     private $image;
+
+    #[ORM\Column(type: 'string')]
+    private $imageName;
+    #[ORM\Column(type: 'integer')]
+    private $imageSize;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $title;
@@ -42,7 +50,9 @@ class Question
     public function setImage(?string $image): self
     {
         $this->image = $image;
-
+        if (null !== $image) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
         return $this;
     }
 

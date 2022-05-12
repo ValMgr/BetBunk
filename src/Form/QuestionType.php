@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 
 class QuestionType extends AbstractType
@@ -28,7 +30,7 @@ class QuestionType extends AbstractType
                     'class' => 'form-field',
                 ]
             ])
-            ->add('image', FileType::class, [
+            ->add('image', VichImageType::class, [
                 'label' => 'Image (Optionnel)',
                 'mapped' => false,
                 'required' => false,

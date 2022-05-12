@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 use App\Form\QuestionType;
 
@@ -20,41 +22,54 @@ class QuizFormType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('thumbnail', FileType::class, [
+            ->add('thumbnail', VichImageType::class, [
                 'label' => 'Miniature (PNG or JPG)',
-                'mapped' => false,
                 'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/gif',
-                            'image/bmp',
-                            'image/webp',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid thumbnails',
-                    ])
-                ],
+                'allow_delete' => true,
+                'download_uri' => true,
+                'image_uri' => true,
+                'delete_label' => 'Supprimer l\'image',
+                'download_label' => 'Télécharger l\'image',
+                'asset_helper' => true,
+
+                // 'constraints' => [
+                //     new File([
+                //         'maxSize' => '4096k',
+                //         'mimeTypes' => [
+                //             'image/jpeg',
+                //             'image/png',
+                //             'image/gif',
+                //             'image/bmp',
+                //             'image/webp',
+                //         ],
+                //         'mimeTypesMessage' => 'Please upload a valid thumbnails',
+                //     ])
+                // ],
             ])
-            ->add('image', FileType::class, [
+            ->add('image', VichImageType::class, [
                 'label' => 'Miniature (PNG or JPG)',
-                'mapped' => false,
                 'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/gif',
-                            'image/bmp',
-                            'image/webp',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid thumbnails',
-                    ])
-                ],
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => true,
+                'image_uri' => true,
+                'delete_label' => 'Supprimer l\'image',
+                'download_label' => 'Télécharger l\'image',
+                'asset_helper' => true,
+
+                // 'constraints' => [
+                //     new File([
+                //         'maxSize' => '4096k',
+                //         'mimeTypes' => [
+                //             'image/jpeg',
+                //             'image/png',
+                //             'image/gif',
+                //             'image/bmp',
+                //             'image/webp',
+                //         ],
+                //         'mimeTypesMessage' => 'Please upload a valid thumbnails',
+                //     ])
+                // ],
             ])
             ->add('time')
             ->add('questions', CollectionType::class, [
