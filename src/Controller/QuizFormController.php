@@ -6,89 +6,70 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 
-
-
+use App\Services\FileLoader;
+use App\Services\QuestionGenerator;
+use App\Services\QuizzGenerator;
 
 use App\Form\QuizFormType;
+use App\Entity\QuizText;
+use App\Entity\QuizCategory;
 use App\Entity\Quiz;
 
 class QuizFormController extends AbstractController
 {
 
+    function __construct(FileLoader $fileLoader, Security $security){
+        $this->fileLoader = $fileLoader;
+        $this->security = $security;
+    }
+
+    #[Route('/quiz/create/type', name: 'select_quiz_type')]
+    public function chooseType(Request $request){
+        return $this->render('quiz/select_type.html.twig');
+    }
+
     #[Route('/quiz/create', name: 'createQuiz')]
-    public function createQuiz(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
+    public function createQuiz(Request $request, FileLoader $fileLoader, EntityManagerInterface $entityManager,
+    QuestionGenerator $questionGenerator, QuizzGenerator $quizGenerator): Response
     {
 
-        $quiz = new Quiz();
+        $quiz = $_GET['type'] === 'text' ? new QuizText() : new QuizzCategory();
         $form = $this->createForm(QuizFormType::class, $quiz);
         $form->handleRequest($request);
-
+  
         if ($form->isSubmitted() && $form->isValid()) {
-
+          
             $data = $form->getData();
 
             $thumbnail = $form->get('thumbnail')->getData();
-
             if ($thumbnail) {
-                $originalFilenameThumbnails = pathinfo($thumbnail->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilenameThumbnails = $slugger->slug($originalFilenameThumbnails);
-                $newFilenameThumbnails = $safeFilenameThumbnails.'-'.uniqid().'.'.$thumbnail->guessExtension();
-
-                try {
-                    $thumbnail->move(
-                        $this->getParameter('thumbnails_directory'),
-                        $newFilenameThumbnails
-                    );
-                } catch (FileException $e) {
-                }
-
-                $quiz->setThumbnail($newFilenameThumbnails);
+                $thumnbail = $this->fileLoader->registerFile($thumbnail, $this->getParameter('thumbnails_directory'));
+                $quiz->setThumbnail($thumbnail);
             }
             
             $image = $form->get('image')->getData();
-
             if ($image) {
-                $originalFilenameImages = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilenameImages = $slugger->slug($originalFilenameImages);
-                $newFilenameImages = $safeFilenameImages.'-'.uniqid().'.'.$image->guessExtension();
-
-                try {
-                    $image->move(
-                        $this->getParameter('images_directory'),
-                        $newFilenameImages
-                    );
-                } catch (FileException $e) {
-                }
-
-                $quiz->setImage($newFilenameImages);
+                $image = $this->fileLoader->registerFile($image, $this->getParameter('images_directory'));
+                $quiz->setImage($image);
             }
-
-            $user = $this->security->getUser();
-            $title = $form->get('title')->getData();
-            $description = $form->get('description')->getData();
-            $note = $form->get('note')->getData();
-            $time = $form->get('time')->getData();
-
-            $quiz-> setUserId($user);
-            $quiz-> setTitle($title);
-            $quiz-> setDescription($description);
-            $quiz-> setNote($note);
-            $quiz-> setTime($time);
+            $quiz->setUserId($this->security->getUser());
+            $quiz->setTitle($form->get('title')->getData());
+            $quiz->setDescription($form->get('description')->getData());
+            $quiz->setNote(0);
+            $quiz->setTime($form->get('time')->getData());
 
             $entityManager->persist($quiz);
             $entityManager->flush();
 
-            return $this->redirectToRoute('QuizForm');
+            return $this->redirectToRoute('quizzes');
         }
         
-        return $this->render('quiz/form.html.twig ', [
+
+        return $this->render('quiz/create.html.twig', [
             'QuizForm' => $form->createView(),
         ]);
     }

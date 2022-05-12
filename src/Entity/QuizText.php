@@ -17,7 +17,7 @@ class QuizText extends Quiz
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\OneToMany(mappedBy: 'quizText', targetEntity: Question::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'quizText', targetEntity: Question::class, orphanRemoval: true, cascade: ['persist'])]
     private $questions;
 
     public function __construct()

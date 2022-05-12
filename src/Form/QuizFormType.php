@@ -8,6 +8,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
+use App\Form\QuestionType;
 
 
 class QuizFormType extends AbstractType
@@ -17,7 +20,6 @@ class QuizFormType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            // ->add('thumbnail')
             ->add('thumbnail', FileType::class, [
                 'label' => 'Miniature (PNG or JPG)',
                 'mapped' => false,
@@ -54,8 +56,14 @@ class QuizFormType extends AbstractType
                     ])
                 ],
             ])
-            ->add('note')
             ->add('time')
+            ->add('questions', CollectionType::class, [
+                'label' => false,
+                'entry_type' => QuestionType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'by_reference' => false,
+            ])
         ;
     }
 

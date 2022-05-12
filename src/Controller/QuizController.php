@@ -7,17 +7,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 
+use App\Entity\Quiz;
+
 class QuizController extends AbstractController
 {
     #[Route('/quiz', name: 'quizzes')]
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
+        $quizzes = $doctrine->getRepository(Quiz::class)->findAll();
+        dd($quizzes[0]->getQuestions()[0]);
+
         return $this->render('quiz/index.html.twig', [
             'controller_name' => 'QuizController',
         ]);
     }
 
-    #[Route('/quiz/{id}', name: 'quiz')]
+    #[Route('/quiz/play/{id}', name: 'quiz')]
     public function getQuiz(ManagerRegistry $doctrine, int $id): Response
     {
         $quiz = $doctrine->getRepository(Quiz::class)->find($id);
