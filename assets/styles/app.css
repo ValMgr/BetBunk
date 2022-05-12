@@ -6,15 +6,32 @@
   body {
     @apply bg-white  text-black dark:bg-dark-600 dark:text-white
         transition-all ease-in duration-200;
-    position: relative;
-    min-height: 100vh;
-  }
+        position: relative;
+        min-height: 100vh;
+    }
+
+    @media (min-width: 1536px) {
+        .container{
+            max-width: 1330px !important;
+        }
+    }
+
 }
 
 @layer components {
   .btn {
-    @apply px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-white rounded duration-300;
+    @apply px-4 py-2 rounded duration-300;
   }
+
+  .btn-primary{
+    @apply bg-yellow-400 hover:bg-yellow-500 text-white;
+  }
+
+  .btn-secondary{
+    @apply bg-byzantine-400 hover:bg-byzantine-500 text-white;
+  }
+
+  .btn
 
   /** Form classes **/
   .form-row {

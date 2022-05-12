@@ -10,6 +10,7 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+import { listenForNewQuestion } from './controllers/quizz_controller';
 
 function docReady(fn) {
     if (document.readyState === "complete" || document.readyState === "interactive") {
@@ -21,7 +22,9 @@ function docReady(fn) {
 
 docReady(() => {
 
+
     setMinHeight();
+    listenForNewQuestion();
     const darkModeToggle = document.querySelector('#dark-toggle');
     darkModeToggle.addEventListener('click', toggleDarkMode.bind(darkModeToggle));
 
@@ -59,6 +62,10 @@ docReady(() => {
         const minHeight = window.innerHeight - header.offsetHeight - footer.offsetHeight;
         main.style.minHeight = `${minHeight}px`;
     }
+
+
+
+    
 
 });
 
