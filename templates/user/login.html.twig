@@ -21,7 +21,7 @@ endblock %} {% block body %}
     {# CRSF Token #}
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <button class="btn" type="submit">Connexion</button>
+    <button class="btn btn-primary" type="submit">Connexion</button>
 
     {% if error %}
     <div class="error">

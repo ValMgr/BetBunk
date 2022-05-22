@@ -31,7 +31,7 @@ class UserFixtures extends Fixture implements FixtureInterface, OrderedFixtureIn
         $admin->setEmail('admin@betbunk.com');
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setPassword($password);
-        $admin->setExperience(rand(0, 300000));
+        $admin->setExperience(rand(0, 3000));
         $manager->persist($admin);
 
         $dev = new User();
@@ -39,7 +39,7 @@ class UserFixtures extends Fixture implements FixtureInterface, OrderedFixtureIn
         $dev->setEmail('dev@betbunk.com');
         $dev->setRoles(['ROLE_ADMIN']);
         $dev->setPassword($password);
-        $dev->setExperience(rand(0, 300000));
+        $dev->setExperience(rand(0, 3000));
         $manager->persist($dev);
 
         for($i=0;$i < 10; $i++){
@@ -48,7 +48,7 @@ class UserFixtures extends Fixture implements FixtureInterface, OrderedFixtureIn
             $user->setEmail('user'.$i.'@betbunk.com');
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($password);
-            $user->setExperience(rand(0, 300000));
+            $user->setExperience(rand(0, 3000));
             $manager->persist($user);
         }
 
