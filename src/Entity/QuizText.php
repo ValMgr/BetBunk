@@ -12,11 +12,6 @@ use App\Entity\Quiz;
 #[ORM\Entity(repositoryClass: QuizTextRepository::class)]
 class QuizText extends Quiz
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
-
     #[ORM\OneToMany(mappedBy: 'quizText', targetEntity: Question::class, orphanRemoval: true, cascade: ['persist'])]
     private $questions;
 
@@ -24,12 +19,7 @@ class QuizText extends Quiz
     {
         $this->questions = new ArrayCollection();
     }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
+    
     /**
      * @return Collection<int, Question>
      */
@@ -58,5 +48,10 @@ class QuizText extends Quiz
         }
 
         return $this;
+    }
+
+    public function getCountQuestions(): int
+    {
+        return $this->questions->count();
     }
 }

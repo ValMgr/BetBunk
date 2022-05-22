@@ -10,7 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 
-use App\Services\FileLoader;
+use App\Services\FileUploader;
 use App\Services\QuestionGenerator;
 use App\Services\QuizzGenerator;
 
@@ -22,8 +22,7 @@ use App\Entity\Quiz;
 class QuizFormController extends AbstractController
 {
 
-    function __construct(FileLoader $fileLoader, Security $security){
-        $this->fileLoader = $fileLoader;
+    function __construct(Security $security){
         $this->security = $security;
     }
 
@@ -33,8 +32,7 @@ class QuizFormController extends AbstractController
     }
 
     #[Route('/quiz/create', name: 'createQuiz')]
-    public function createQuiz(Request $request, FileLoader $fileLoader, EntityManagerInterface $entityManager,
-    QuestionGenerator $questionGenerator, QuizzGenerator $quizGenerator): Response
+    public function createQuiz(Request $request, EntityManagerInterface $entityManager): Response
     {
 
         $quiz = $_GET['type'] === 'text' ? new QuizText() : new QuizzCategory();
@@ -45,17 +43,8 @@ class QuizFormController extends AbstractController
           
             $data = $form->getData();
 
-            $thumbnail = $form->get('thumbnail')->getData();
-            if ($thumbnail) {
-                $thumnbail = $this->fileLoader->registerFile($thumbnail, $this->getParameter('thumbnails_directory'));
-                $quiz->setThumbnail($thumbnail);
-            }
-            
-            $image = $form->get('image')->getData();
-            if ($image) {
-                $image = $this->fileLoader->registerFile($image, $this->getParameter('images_directory'));
-                $quiz->setImage($image);
-            }
+            $quiz->setImage($form->get('image')->getData());
+            $quiz->setThumbnail($form->get('thumbnail')->getData());
             $quiz->setUserId($this->security->getUser());
             $quiz->setTitle($form->get('title')->getData());
             $quiz->setDescription($form->get('description')->getData());

@@ -15,7 +15,6 @@ class QuizController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $quizzes = $doctrine->getRepository(Quiz::class)->findAll();
-        dd($quizzes[0]->getQuestions()[0]);
 
         return $this->render('quiz/index.html.twig', [
             'controller_name' => 'QuizController',
@@ -33,7 +32,6 @@ class QuizController extends AbstractController
             );
         }
 
-        dd($quiz);
         return $this->render('quiz/index.html.twig ', [
             'quiz' => $quiz,
         ]);

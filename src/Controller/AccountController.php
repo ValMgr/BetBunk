@@ -21,16 +21,28 @@ class AccountController extends AbstractController
     public function index(): Response
     {
         $user = $this->security->getUser();
-        $xp = 700;
-        //  calculate level from player xp
-        $level = floor(log($xp/100+1,2));
-        $reqXp = 1800;
+        $xp = $user->getExperience();
+
+        // Calculate the user's level based on his experience
+        $level = 1;
+        while ($xp >= $level * (1000 * $level/10)) {
+            $level++;
+        }
+
+        // Calculate user experience needed to reach the next level
+        $xp_to_next_level = $level * (1000 * $level/10) - $xp;
+        // Calculate current level percentage
+        $xp_percentage = floor($xp / ($level * (1000 * $level/10)) * 100);
+        // Calculate current experience from percentage of xp needed to reach the next level
+        $xp_from_percentage = floor($xp_percentage * $xp_to_next_level / 100);
+
 
         return $this->render('user/account.html.twig', [
             'user' => $user,
             'level' => $level,
-            'xp' => $xp,
-            'xp_required' => $reqXp,
+            'xp' => $xp_from_percentage ,
+            'xp_required' => $xp_to_next_level,
+            'xp_percentage' => $xp_percentage,
             'lastPlayedQuiz' => [],
             'quizzes' => [],
         ]);
