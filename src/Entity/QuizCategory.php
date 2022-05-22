@@ -20,11 +20,6 @@ class QuizCategory extends Quiz
         $this->categories = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     /**
      * @return Collection<int, Category>
      */
@@ -53,5 +48,10 @@ class QuizCategory extends Quiz
         }
 
         return $this;
+    }
+
+    public function getCountCategories(): int
+    {
+        return $this->categories->count();
     }
 }

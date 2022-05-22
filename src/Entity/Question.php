@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
@@ -19,9 +20,9 @@ class Question
     #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName', size: 'imageSize')]
     private $image;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', nullable: true)]
     private $imageName;
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $imageSize;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -42,12 +43,12 @@ class Question
         return $this->id;
     }
 
-    public function getImage(): ?string
+    public function getImage(): ?File
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage(?File $image): self
     {
         $this->image = $image;
         if (null !== $image) {
@@ -102,5 +103,23 @@ class Question
         $this->quizText = $quizText;
 
         return $this;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    public function setImageName(string $name){
+        $this->imageName = $name;
+    }
+
+    public function setImageSize(int $size){
+        $this->imageSize = $size;
     }
 }

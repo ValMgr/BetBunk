@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use App\Repository\QuizRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 // use Entity\QuizCategory;
 // use Entity\QuizText;
@@ -41,9 +43,9 @@ class Quiz
     #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName', size: 'imageSize')]
     private $image;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', nullable: true)]
     private $imageName;
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $imageSize;
 
     #[ORM\Column(type: 'integer')]
@@ -85,12 +87,48 @@ class Quiz
         return $this;
     }
 
-    public function getThumbnail(): ?string
+    public function getThumbnail(): ?File
     {
         return $this->thumbnail;
     }
 
-    public function setThumbnail(string $thumbnail): self
+    public function getThumbnailName(): ?string
+    {
+        return $this->thumbnailName;
+    }
+
+    public function getThumbnailSize(): ?int
+    {
+        return $this->thumbnailSize;
+    }
+
+    public function setThumbnailName(string $name){
+        $this->thumbnailName = $name;
+    }
+
+    public function setThumbnailSize(int $size){
+        $this->thumbnailSize = $size;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    public function setImageName(string $name){
+        $this->imageName = $name;
+    }
+
+    public function setImageSize(int $size){
+        $this->imageSize = $size;
+    }
+
+    public function setThumbnail(?File $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
         if (null !== $thumbnail) {
@@ -99,12 +137,12 @@ class Quiz
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage(): ?File
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage(?File $image): self
     {
         $this->image = $image;
         if (null !== $image) {

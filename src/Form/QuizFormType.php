@@ -6,7 +6,6 @@ use App\Entity\Quiz;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -30,21 +29,7 @@ class QuizFormType extends AbstractType
                 'image_uri' => true,
                 'delete_label' => 'Supprimer l\'image',
                 'download_label' => 'Télécharger l\'image',
-                'asset_helper' => true,
-
-                // 'constraints' => [
-                //     new File([
-                //         'maxSize' => '4096k',
-                //         'mimeTypes' => [
-                //             'image/jpeg',
-                //             'image/png',
-                //             'image/gif',
-                //             'image/bmp',
-                //             'image/webp',
-                //         ],
-                //         'mimeTypesMessage' => 'Please upload a valid thumbnails',
-                //     ])
-                // ],
+                'asset_helper' => true
             ])
             ->add('image', VichImageType::class, [
                 'label' => 'Miniature (PNG or JPG)',
@@ -55,21 +40,7 @@ class QuizFormType extends AbstractType
                 'image_uri' => true,
                 'delete_label' => 'Supprimer l\'image',
                 'download_label' => 'Télécharger l\'image',
-                'asset_helper' => true,
-
-                // 'constraints' => [
-                //     new File([
-                //         'maxSize' => '4096k',
-                //         'mimeTypes' => [
-                //             'image/jpeg',
-                //             'image/png',
-                //             'image/gif',
-                //             'image/bmp',
-                //             'image/webp',
-                //         ],
-                //         'mimeTypesMessage' => 'Please upload a valid thumbnails',
-                //     ])
-                // ],
+                'asset_helper' => true
             ])
             ->add('time')
             ->add('questions', CollectionType::class, [
@@ -77,7 +48,7 @@ class QuizFormType extends AbstractType
                 'entry_type' => QuestionType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
-                'by_reference' => false,
+                'by_reference' => false
             ])
         ;
     }
