@@ -15,10 +15,9 @@ class QuizController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $quizzes = $doctrine->getRepository(Quiz::class)->findAll();
-        dd($quizzes[0]->getQuestions()[0]);
-
         return $this->render('quiz/index.html.twig', [
             'controller_name' => 'QuizController',
+            'quizzes' => $quizzes,
         ]);
     }
 
@@ -26,15 +25,15 @@ class QuizController extends AbstractController
     public function getQuiz(ManagerRegistry $doctrine, int $id): Response
     {
         $quiz = $doctrine->getRepository(Quiz::class)->find($id);
-
+     
         if (!$quiz) {
             throw $this->createNotFoundException(
                 'No quiz for id '.$id
             );
         }
 
-        dd($quiz);
-        return $this->render('quiz/index.html.twig ', [
+        // dd($quiz);
+        return $this->render('quiz/quiz.html.twig ', [
             'quiz' => $quiz,
         ]);
     }

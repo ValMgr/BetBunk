@@ -12,22 +12,12 @@ use App\Entity\Quiz;
 #[ORM\Entity(repositoryClass: QuizCategoryRepository::class)]
 class QuizCategory extends Quiz
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
-
     #[ORM\OneToMany(mappedBy: 'quizCategory', targetEntity: Category::class, orphanRemoval: true)]
     private $categories;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     /**
