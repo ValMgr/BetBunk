@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="mt-5">
-     <div class="w-full border border-slate-800 rounded-md p-8 flex flex-row justify-between ">
+     <div id="header" class="w-full border border-slate-800 rounded-md p-8 flex flex-row justify-between ">
       <div>
        <h2 class="text-xl">{{ quiz.title }}</h2>
        <p class="text-base">{{ quiz.description }}</p>
@@ -17,6 +17,18 @@
       <div id="endQuiz" style="display: none;">
        <h2>Quiz terminé</h2>
        <p>Félicitations</p>
+      </div>
+     </div>
+     <div id="finish" class="w-full border border-slate-800 rounded-md p-8 flex flex-row justify-center bg-red-500 content-center" style="display: none;">
+      <div class="text-center">
+       <h2 class="text-xl">Quiz terminé</h2>
+       <h3 class="text-xl">Dommage, vous y étiez presque !</h3>
+      </div>
+     </div>
+     <div id="notFinish" class="w-full border border-slate-800 rounded-md p-8 flex flex-row justify-center bg-green-400 content-center" style="display: none;">
+      <div class="text-center">
+        <h2 class="text-xl">Quiz terminé</h2>
+       <h3 class="text-xl">Féliciations !</h3>
       </div>
      </div>
 
@@ -34,11 +46,13 @@
      <div class="py-5 flex items-center flex-col">
         {% for question in quiz.questions %}
          <div class="flex flex-row justify-between m-1 ">
+          {% if question.title %}
           <div class="w-40 text-center p-3 border border-slate-800">
            <p>{{question.title}}</p>
           </div>
+          {% endif %}
           <div class="w-40 text-center p-3 border border-slate-800">
-           <p class="hideAnswer answer" id="{{ question.id }}">{{question.answer}}</p>
+           <p class="hideAnswer answer wrongAnswer" id="{{ question.id }}">{{question.answer}}</p>
           </div>
          </div>
         {% endfor %}
