@@ -32,8 +32,7 @@ class QuizController extends AbstractController
             );
         }
 
-        // dd($quiz);
-        return $this->render('quiz/quiz.html.twig ', [
+        return $this->render('quiz/index.html.twig ', [
             'quiz' => $quiz,
         ]);
     }

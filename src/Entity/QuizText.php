@@ -19,7 +19,7 @@ class QuizText extends Quiz
     {
         $this->questions = new ArrayCollection();
     }
-
+    
     /**
      * @return Collection<int, Question>
      */
@@ -48,5 +48,10 @@ class QuizText extends Quiz
         }
 
         return $this;
+    }
+
+    public function getCountQuestions(): int
+    {
+        return $this->questions->count();
     }
 }

@@ -12,7 +12,7 @@ use App\Entity\Quiz;
 #[ORM\Entity(repositoryClass: QuizCategoryRepository::class)]
 class QuizCategory extends Quiz
 {
-    #[ORM\OneToMany(mappedBy: 'quizCategory', targetEntity: Category::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'quizCategory', targetEntity: Category::class, orphanRemoval: true, cascade: ['persist'])]
     private $categories;
 
     public function __construct()
@@ -48,5 +48,10 @@ class QuizCategory extends Quiz
         }
 
         return $this;
+    }
+
+    public function getCountCategories(): int
+    {
+        return $this->categories->count();
     }
 }

@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\QuizRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 // use Entity\QuizCategory;
 // use Entity\QuizText;
@@ -13,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\InheritanceType("SINGLE_TABLE")]
 #[ORM\DiscriminatorColumn(name:"type", type:"string", length:2)]
 #[ORM\DiscriminatorMap(["QC"=>QuizCategory::class, "QT"=>QuizText::class])]
-
+#[Vich\Uploadable] 
 class Quiz
 {
     #[ORM\Id]
@@ -28,10 +31,22 @@ class Quiz
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Vich\UploadableField(mapping: 'thumbnails', fileNameProperty: 'thumbnailName', size: 'thumbnailSize')]
     private $thumbnail;
 
+    #[ORM\Column(type: 'string')]
+    private $thumbnailName;
+    #[ORM\Column(type: 'integer')]
+    private $thumbnailSize;
+
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName', size: 'imageSize')]
     private $image;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private $imageName;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $imageSize;
 
     #[ORM\Column(type: 'integer')]
     private $note;
@@ -72,27 +87,67 @@ class Quiz
         return $this;
     }
 
-    public function getThumbnail(): ?string
+    public function getThumbnail(): ?File
     {
         return $this->thumbnail;
     }
 
-    public function setThumbnail(string $thumbnail): self
+    public function getThumbnailName(): ?string
+    {
+        return $this->thumbnailName;
+    }
+
+    public function getThumbnailSize(): ?int
+    {
+        return $this->thumbnailSize;
+    }
+
+    public function setThumbnailName(string $name){
+        $this->thumbnailName = $name;
+    }
+
+    public function setThumbnailSize(int $size){
+        $this->thumbnailSize = $size;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    public function setImageName(string $name){
+        $this->imageName = $name;
+    }
+
+    public function setImageSize(int $size){
+        $this->imageSize = $size;
+    }
+
+    public function setThumbnail(?File $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
-
+        if (null !== $thumbnail) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage(): ?File
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage(?File $image): self
     {
         $this->image = $image;
-
+        if (null !== $image) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
         return $this;
     }
 
