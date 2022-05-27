@@ -1,6 +1,15 @@
 const collection = Array.from(document.getElementsByClassName("answer"));
 var finalCollection = 0;
 
+function accentChars(str)
+    {
+        return str
+            .replace(/[àáâãäå]/g,"a")
+            .replace(/[éèêë]/g,"e")
+            .replace(/[ùüû]/g,"u")
+            .replace(/[^a-z0-9]/gi,'');
+    }
+
 export function answerFunction() {
 
  const timeForQuiz = document.getElementById('time');
@@ -38,9 +47,14 @@ export function answerFunction() {
   
    collection.forEach(function(element){
     const lowerCaseAnswer = element.innerText.toLowerCase();
+    const finalAnswer = accentChars(lowerCaseAnswer)
+    
+
     const lowerCaseResponse = inputAnswer.value.toLowerCase();
+    const finalResponse = accentChars(lowerCaseResponse)
+    
   
-    if (lowerCaseResponse == lowerCaseAnswer) {
+    if (finalResponse == finalAnswer) {
      element.classList.remove("hideAnswer");
      element.classList.remove("wrongAnswer");
      element.classList.add("showAnswer");
