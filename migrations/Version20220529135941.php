@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220525114749 extends AbstractMigration
+final class Version20220529135941 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -26,7 +26,7 @@ final class Version20220525114749 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE category (id INT NOT NULL, quiz_category_id INT NOT NULL, name VARCHAR(255) NOT NULL, color VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_64C19C13D608E42 ON category (quiz_category_id)');
-        $this->addSql('CREATE TABLE question (id INT NOT NULL, category_id INT DEFAULT NULL, quiz_text_id INT NOT NULL, image VARCHAR(255) DEFAULT NULL, image_name VARCHAR(255) DEFAULT NULL, image_size INT DEFAULT NULL, title VARCHAR(255) DEFAULT NULL, answer VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE question (id INT NOT NULL, category_id INT DEFAULT NULL, quiz_text_id INT DEFAULT NULL, image VARCHAR(255) DEFAULT NULL, image_name VARCHAR(255) DEFAULT NULL, image_size INT DEFAULT NULL, title VARCHAR(255) DEFAULT NULL, answer VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_B6F7494E12469DE2 ON question (category_id)');
         $this->addSql('CREATE INDEX IDX_B6F7494E7BD798E8 ON question (quiz_text_id)');
         $this->addSql('CREATE TABLE quiz (id INT NOT NULL, user_id_id INT NOT NULL, title VARCHAR(255) NOT NULL, description TEXT NOT NULL, thumbnail VARCHAR(255) NOT NULL, thumbnail_name VARCHAR(255) NOT NULL, thumbnail_size INT NOT NULL, image VARCHAR(255) DEFAULT NULL, image_name VARCHAR(255) DEFAULT NULL, image_size INT DEFAULT NULL, note INT NOT NULL, time INT NOT NULL, type VARCHAR(2) NOT NULL, PRIMARY KEY(id))');

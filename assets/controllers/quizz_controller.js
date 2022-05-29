@@ -1,7 +1,3 @@
-export default () => {
-  console.log("quizz_controller loaded");
-};
-
 export function listenForNewQuestion() {
   document.querySelectorAll(".add_item_link").forEach((btn) => {
     btn.addEventListener("click", addFormToCollection);

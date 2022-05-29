@@ -18,11 +18,11 @@
 
 <div class="mb-10">
     <div>
-        <h2 class="font-bold">Un Quiz aléatoire</h2>
+        <h2 class="font-bold">Nos quizs</h2>
     </div>
     <a href="/quiz/play/{{randomQuiz.id}}" class="cardQuizz w-3/4 max-w-3xl">
             <div>
-                <img src='{{randomQuiz.thumbnail}}' alt='{{ randomQuiz.title }}'/>
+                <img src='{{ asset('uploads/thumbnails/' ~ randomQuiz.thumbnailName) }}' alt='{{ randomQuiz.title }}'/>
             </div>
             <div>
                 <h3>{{ randomQuiz.title }}</h3>
@@ -33,12 +33,12 @@
 
 <div class="mb-10">
     <div>
-        <h2 class="font-bold">Quelques Quizz</h2>
+        <h2 class="font-bold">Nos derniers quizs</h2>
     </div>
     {% for quiz in quizzes | slice(0, 2) %}
         <a href="/quiz/play/{{quiz.id}}" class="cardQuizz w-3/4 max-w-3xl">
             <div>
-                <img src='{{quiz.thumbnail}}' alt='{{ quiz.title }}'/>
+                <img src='{{ asset('uploads/thumbnails/' ~ quiz.thumbnailName) }}' alt='{{ quiz.title }}'/>
             </div>
             <div>
                 <h3>{{ quiz.title }}</h3>

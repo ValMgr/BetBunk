@@ -1,14 +1,16 @@
-const collection = Array.from(document.getElementsByClassName("answer"));
-var finalCollection = 0;
 
-function accentChars(str)
-    {
-        return str
-            .replace(/[àáâãäå]/g,"a")
-            .replace(/[éèêë]/g,"e")
-            .replace(/[ùüû]/g,"u")
-            .replace(/[^a-z0-9]/gi,'');
-    }
+const answersElements = Array.from(document.getElementsByClassName("answer"));
+const answers = answersElements.map(a => sanitizeString(a.innerHTML));
+let finalCollection = 0;
+
+function sanitizeString(str){
+    return str
+        .toLowerCase()
+        .replace(/[àáâãäå]/g,"a")
+        .replace(/[éèêë]/g,"e")
+        .replace(/[ùüû]/g,"u")
+        .replace(/[^a-z0-9]/gi,'');
+}
 
 export function answerFunction() {
 
@@ -27,62 +29,55 @@ export function answerFunction() {
  const inputAnswer = document.getElementById('answer');
  const findAnswer = document.getElementById('findAnswer');
 
- const time = document.getElementById('time').innerText.match(/\d+/)[0];
- var count = parseInt(time);
+ const buttonStop = document.getElementById('buttonStop');
 
- answerNumber.innerText = collection.length;
+ const time = document.getElementById('time').innerText.match(/\d+/)[0];
+ let count = parseInt(time);
+
+ answerNumber.innerText = answers.length;
  clockSeconds.innerText = count;
  clock.style.display = 'block';
  timeForQuiz.style.display = 'none';
  answerBlock.style.display = 'block';
  buttonStart.style.display = 'none';
 
+ const timerInterval = setInterval(timer, 1000);
+
+ buttonStop.addEventListener('click', () => {count = 0;});
+
  function timer() {
-  count = count - 1;
   clockSeconds.innerText = count;
 
   document.addEventListener('keyup', () => {
-  
-   findAnswer.innerText = finalCollection;  
-  
-   collection.forEach(function(element){
-    const lowerCaseAnswer = element.innerText.toLowerCase();
-    const finalAnswer = accentChars(lowerCaseAnswer)
-    
-
-    const lowerCaseResponse = inputAnswer.value.toLowerCase();
-    const finalResponse = accentChars(lowerCaseResponse)
-    
-  
-    if (finalResponse == finalAnswer) {
-     element.classList.remove("hideAnswer");
-     element.classList.remove("wrongAnswer");
-     element.classList.add("showAnswer");
-     element.classList.add("correctAnswer");
-     inputAnswer.value = "";
-     finalCollection += 1;
-  
+    const input = sanitizeString(inputAnswer.value);
+    if(answers.includes(input)) {
+      finalCollection++;
+      inputAnswer.value = '';
+      const element = answersElements[answers.indexOf(input)];
+      element.classList.remove('hideAnswer');
+      element.classList.remove('wrongAnswer');
+      findAnswer.innerText = finalCollection;  
     }
-   });
-  })
+  });
 
-  if (count === 0 && finalCollection != collection.length) {
+  if (count === 0 && finalCollection != answers.length) {
    clearInterval(timerInterval);
    timeBlock.style.display = "none";
    answerBlock.style.display = "none";
    header.style.display = "none";
    finish.style.display = "block";
-   collection.forEach(function(element){
-    element.classList.remove("hideAnswer");
+   answersElements.forEach((e) => {
+    e.classList.remove("hideAnswer");
    });
    
-  } else if (finalCollection == collection.length){
+  } else if (finalCollection == answers.length){
    notFinish.style.display = "block";
    answerBlock.style.display = "none";
    header.style.display = "none";
   }
+  
+  count -= 1;
  }
 
- var timerInterval = setInterval(timer, 1000);
 
 }

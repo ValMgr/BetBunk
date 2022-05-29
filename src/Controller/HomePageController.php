@@ -14,10 +14,10 @@ class HomePageController extends AbstractController
     #[Route('/', name: 'homepage')]
     public function index(ManagerRegistry $doctrine): Response
     {
+
         $quizzes = $doctrine->getRepository(Quiz::class)->findAll();
         $numberOfQuiz = count($quizzes);
         $randomQuiz = array_rand($quizzes, 1);
-        $quizzes[$randomQuiz];
         return $this->render('home_page/index.html.twig', [
             'controller_name' => 'HomePageController',
             'quizzes' => $quizzes,

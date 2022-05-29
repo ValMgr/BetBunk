@@ -21,7 +21,7 @@ class Category
     #[ORM\Column(type: 'string', length: 255)]
     private $color;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Question::class)]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Question::class, cascade: ['persist'])]
     private $questions;
 
     #[ORM\ManyToOne(targetEntity: QuizCategory::class, inversedBy: 'categories')]

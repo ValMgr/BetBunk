@@ -25,6 +25,8 @@ class QuizController extends AbstractController
     public function getQuiz(ManagerRegistry $doctrine, int $id): Response
     {
         $quiz = $doctrine->getRepository(Quiz::class)->find($id);
+        $template = get_class($quiz) === 'App\Entity\QuizText' ? 'quiz/quiz_text.html.twig' : 'quiz/quiz_category.html.twig';
+
      
         if (!$quiz) {
             throw $this->createNotFoundException(
@@ -32,7 +34,7 @@ class QuizController extends AbstractController
             );
         }
 
-        return $this->render('quiz/quiz.html.twig ', [
+        return $this->render($template, [
             'quiz' => $quiz,
         ]);
     }

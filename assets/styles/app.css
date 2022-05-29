@@ -6,15 +6,34 @@
   body {
     @apply bg-white  text-black dark:bg-dark-600 dark:text-white
         transition-all ease-in duration-200;
-        position: relative;
-        min-height: 100vh;
-    }
+    position: relative;
+    min-height: 100vh;
+  }
 
-    @media (min-width: 1536px) {
-        .container{
-            max-width: 1330px !important;
-        }
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1330px !important;
     }
+  }
+
+  .category {
+    @apply mx-2 mb-2;
+    border: 1px solid black !important;
+  }
+
+  .category > div:not(:last-child) {
+    @apply border-b border-gray-200 dark:border-gray-600;
+
+  }
+
+  .category > div {
+    @apply dark:bg-dark-300;
+  }
+
+  .category-name {
+    @apply text-center;
+    background-color: var(--color);
+  }
 
 }
 
@@ -23,11 +42,11 @@
     @apply px-4 py-2 rounded duration-300;
   }
 
-  .btn-primary{
+  .btn-primary {
     @apply bg-yellow-400 hover:bg-yellow-500 text-white;
   }
 
-  .btn-secondary{
+  .btn-secondary {
     @apply bg-byzantine-400 hover:bg-byzantine-500 text-white;
   }
 
@@ -56,16 +75,16 @@
 
 @layer custom {
   .cardQuizz {
-    @apply flex flex-row justify-around items-center m-3 bg-slate-100 dark:bg-dark-300 rounded-lg w-fit gap-3.5 max-h-40 pr-8;
+    @apply flex flex-row items-center m-3 bg-slate-100 dark:bg-dark-300 rounded-lg w-fit gap-3.5 max-h-40 pr-8;
   }
   .cardQuizz img {
     @apply rounded-l-lg w-24 h-24 object-cover max-h-32;
   }
   .cardQuizz h3 {
-    @apply text-lg font-bold;
+    @apply text-lg font-bold underline;
   }
   .cardQuizz p {
-    @apply text-base;
+    @apply text-sm;
   }
   .error {
     @apply my-4;
@@ -77,15 +96,15 @@
   .profil-picture {
     @apply rounded-full w-32 h-32 object-cover;
   }
-  .required_xp{
-      width: 100%;
-      position: relative;
-      border-radius: 5px;
-      z-index: 2;
-      border: 1px solid black !important;
-      --xp: 39%;
+  .required_xp {
+    width: 100%;
+    position: relative;
+    border-radius: 5px;
+    z-index: 2;
+    border: 1px solid black !important;
+    --xp: 39%;
   }
-  .required_xp::after{
+  .required_xp::after {
     content: "";
     position: absolute;
     display: block;
@@ -98,18 +117,20 @@
     border-radius: 5px;
   }
 
-  .showAnswer {
-    @apply block;
+  .answer {
+    dispay: block;
+    color: #2ed628;
   }
+
   .hideAnswer {
-    @apply hidden;
+    visibility: hidden;
   }
-  .correctAnswer {
-    /* @apply text-green-500; */
-    color: #2ED628;
-  }
+
   .wrongAnswer {
-    /* @apply text-pink-600; */
-    color: #F53519;
+    color: #f53519 !important;
+  }
+
+  #buttonStop {
+    width: fit-content;
   }
 }

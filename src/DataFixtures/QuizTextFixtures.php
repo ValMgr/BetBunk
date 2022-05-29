@@ -36,7 +36,6 @@ class QuizTextFixtures extends Fixture implements FixtureInterface, OrderedFixtu
         $thumbName = $thumb->getFilename();
         $thumbSize = $thumb->getSize();
 
-
         $quiz_1 = new QuizText();
         $quiz_1->setTitle('Spécialités culinaires de Bordeaux');
         $quiz_1->setDescription('Trouvez les spécialités culinaires de Bordeaux');

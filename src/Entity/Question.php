@@ -31,11 +31,10 @@ class Question
     #[ORM\Column(type: 'string', length: 255)]
     private $answer;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'questions')]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'questions', cascade: ['persist'])]
     private $category;
 
     #[ORM\ManyToOne(targetEntity: QuizText::class, inversedBy: 'questions')]
-    #[ORM\JoinColumn(nullable: false)]
     private $quizText;
 
     public function getId(): ?int

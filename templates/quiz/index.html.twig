@@ -10,9 +10,9 @@
 
         {% for quiz in quizzes %}
         <a href="/quiz/play/{{quiz.id}}" class="cardQuizz w-full">
-            <div class="w-1/4">
-                <img src='{{quiz.thumbnail}}' alt='{{ quiz.title }}'/>
-            </div>
+            <div>
+                <img src='{{ asset('uploads/thumbnails/' ~ quiz.thumbnailName )}}' alt='{{ quiz.title }}'/>
+            </div> 
             <div class="w-3/4">
                 <h3>{{ quiz.title }}</h3>
                 <p>{{ quiz.description }}</p>
