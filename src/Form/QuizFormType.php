@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 
+use App\Form\CategoryType;
 use App\Form\QuestionType;
 
 
@@ -42,21 +43,32 @@ class QuizFormType extends AbstractType
                 'download_label' => 'Télécharger l\'image',
                 'asset_helper' => true
             ])
-            ->add('time')
-            ->add('questions', CollectionType::class, [
-                'label' => false,
-                'entry_type' => QuestionType::class,
-                'entry_options' => ['label' => false],
-                'allow_add' => true,
-                'by_reference' => false
-            ])
-        ;
+            ->add('time');
+
+            if($options['type'] === 'text') {
+                $builder->add('questions', CollectionType::class, [
+                    'label' => false,
+                    'entry_type' => QuestionType::class,
+                    'entry_options' => ['label' => false],
+                    'allow_add' => true,
+                    'by_reference' => false
+                ]);
+            }
+            if($options['type'] === 'category'){
+                $builder->add('categories', CollectionType::class, [
+                    'label' => false,
+                    'entry_type' => CategoryType::class,
+                    'entry_options' => ['label' => false],
+                    'allow_add' => true,
+                    'by_reference' => false
+                ]);
+            }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Quiz::class,
+            'type' => 'text'
         ]);
     }
 }

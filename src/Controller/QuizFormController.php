@@ -35,8 +35,8 @@ class QuizFormController extends AbstractController
     public function createQuiz(Request $request, EntityManagerInterface $entityManager): Response
     {
 
-        $quiz = $_GET['type'] === 'text' ? new QuizText() : new QuizzCategory();
-        $form = $this->createForm(QuizFormType::class, $quiz);
+        $quiz = $_GET['type'] === 'text' ? new QuizText() : new QuizCategory();
+        $form = $this->createForm(QuizFormType::class, $quiz, ['type' => $_GET['type']]);
         $form->handleRequest($request);
   
         if ($form->isSubmitted() && $form->isValid()) {
@@ -57,8 +57,8 @@ class QuizFormController extends AbstractController
             return $this->redirectToRoute('quizzes');
         }
         
-
-        return $this->render('quiz/create.html.twig', [
+        $template = $_GET['type'] === 'text' ? 'quiz/create_text.html.twig' : 'quiz/create_category.html.twig';
+        return $this->render($template, [
             'QuizForm' => $form->createView(),
         ]);
     }

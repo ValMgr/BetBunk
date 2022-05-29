@@ -20,12 +20,14 @@ class QuestionType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Question',
+                'required' => false,
                 'attr' => [
                     'class' => 'form-field',
                 ]
             ])
             ->add('answer', TextType::class, [
                 'label' => 'Réponse',
+                'required' => true,
                 'attr' => [
                     'class' => 'form-field',
                 ]
@@ -54,10 +56,4 @@ class QuestionType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Question::class,
-        ]);
-    }
 }

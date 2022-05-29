@@ -35,7 +35,7 @@
     <div>
         <h2 class="font-bold">Nos derniers quizs</h2>
     </div>
-    {% for quiz in quizzes | slice(0, 2) %}
+    {% for quiz in quizzes | slice(0, 3) %}
         <a href="/quiz/play/{{quiz.id}}" class="cardQuizz w-3/4 max-w-3xl">
             <div>
                 <img src='{{ asset('uploads/thumbnails/' ~ quiz.thumbnailName) }}' alt='{{ quiz.title }}'/>

@@ -4,7 +4,25 @@
 
 {% block body %}
 
-    <a href="/quiz/create/?type=text" class="btn btn-primary">Texte</a>
-    <a href="/quiz/create/?type=category" class="btn btn-primary">Catégorie</a>
+    <div class="container flex justify-evenly">
+
+        <a href="/quiz/create/?type=text" class="quizz-type-card">
+            <h2>Quiz Texte</h2>
+            
+            <p>Quiz basé sur une simple question et/ou image optionnelle. Les réponses se présentent sous la forme de simple champs texte lié ou non à un <i>titre</i> pour ajouter une sorte d'aide / indication pour la réponse. </p>
+
+            <div class="btn btn-primary">Créer</div>
+        </a>
+
+        <a href="/quiz/create/?type=category" class="quizz-type-card">
+            <h2>Quiz Catégories</h2>
+
+            <p>Quiz basé sur une simple question et/ou image optionnelle. Les réponses se présentent sous la forme de simple champs texte lié ou non à un <i>titre</i> pour ajouter une sorte d'aide / indication pour la réponse et son regroupé dans des catégories possdéant un tire et une couleur.</p>
+
+            <div class="btn btn-primary">Créer</div>
+        </a>
+
+    </div>
+
 
 {% endblock %}

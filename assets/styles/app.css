@@ -35,6 +35,25 @@
     background-color: var(--color);
   }
 
+  .quizz-type-card{
+    @apply p-4 border border-gray-300 flex flex-col w-1/2 mx-3 rounded;
+    max-width: 400px;
+  }
+
+  .quizz-type-card h2{
+    @apply text-center text-2xl underline mb-5;
+  }
+
+  .quizz-type-card p{
+    @apply grow;
+  }
+
+  .quizz-type-card .btn{
+    @apply mt-4;
+    width: fit-content;
+    align-self: center;
+  }
+
 }
 
 @layer components {
@@ -133,4 +152,6 @@
   #buttonStop {
     width: fit-content;
   }
+
+ 
 }

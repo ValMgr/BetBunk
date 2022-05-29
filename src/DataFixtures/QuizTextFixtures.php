@@ -32,13 +32,13 @@ class QuizTextFixtures extends Fixture implements FixtureInterface, OrderedFixtu
     public function load(ObjectManager $manager): void
     {
         $user = $manager->getRepository(User::class)->findOneByUsername('admin');
-        $thumb = new File($this->params->get('thumbnails_directory').'/ah64d.jpg');
+        $thumb = new File($this->params->get('thumbnails_directory').'/F1-75.jpeg');
         $thumbName = $thumb->getFilename();
         $thumbSize = $thumb->getSize();
 
         $quiz_1 = new QuizText();
-        $quiz_1->setTitle('Spécialités culinaires de Bordeaux');
-        $quiz_1->setDescription('Trouvez les spécialités culinaires de Bordeaux');
+        $quiz_1->setTitle('Liste des pilotes ayant gagné un Grand Prix de F1 en 2021 ');
+        $quiz_1->setDescription('La liste de tout les pilotes ayant gagné une place dans un Grand Prix de F1 en 2021');
         $quiz_1->setThumbnail($thumb);
         $quiz_1->setThumbnailName($thumbName);
         $quiz_1->setThumbnailSize($thumbSize);
@@ -47,23 +47,36 @@ class QuizTextFixtures extends Fixture implements FixtureInterface, OrderedFixtu
         $quiz_1->setUserId($user);
 
         $q1_1 = new Question();
-        $q1_1->setAnswer('Cannelés');
+        $q1_1->setTitle('10 victoires');
+        $q1_1->setAnswer('Lewis Hamilton');
         $q1_2 = new Question();
-        $q1_2->setAnswer('Vin');
+        $q1_2->setTitle('8 victoires');
+        $q1_2->setAnswer('Max Verstappen');
         $q1_3 = new Question();
-        $q1_3->setAnswer('Lamproie');
+        $q1_3->setTitle('1 victoire');
+        $q1_3->setAnswer('Sergio Perez');
         $q1_4 = new Question();
-        $q1_4->setAnswer('Gratton');
+        $q1_4->setTitle('1 victoire');
+        $q1_4->setAnswer('Daniel Ricciardo');
         $q1_5 = new Question();
-        $q1_5->setAnswer('Lillet');
-        
+        $q1_5->setTitle('1 victoire');
+        $q1_5->setAnswer('Valtteri Bottas');
+        $q1_6 = new Question();
+        $q1_6->setTitle('1 victoire');
+        $q1_6->setAnswer('Esteban Ocon');
+
         $quiz_1->addQuestion($q1_1);
         $quiz_1->addQuestion($q1_2);
         $quiz_1->addQuestion($q1_3);
         $quiz_1->addQuestion($q1_4);
         $quiz_1->addQuestion($q1_5);
-
+        $quiz_1->addQuestion($q1_6);
+       
         $manager->persist($quiz_1);
+
+        $thumb = new File($this->params->get('thumbnails_directory').'/phones.jpg');
+        $thumbName = $thumb->getFilename();
+        $thumbSize = $thumb->getSize();
 
         $quiz_2 = new QuizText();
         $quiz_2->setTitle('Les noms et prénoms des gens de la classe');

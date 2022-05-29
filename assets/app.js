@@ -29,7 +29,7 @@ docReady(() => {
     darkModeToggle.addEventListener('click', toggleDarkMode.bind(darkModeToggle));
 
     const timer = document.querySelector('#buttonStart');
-    timer.addEventListener('click', answerFunction);
+    if(timer) timer.addEventListener('click', answerFunction);
 
     if (localStorage.theme === 'dark' ||
         (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
