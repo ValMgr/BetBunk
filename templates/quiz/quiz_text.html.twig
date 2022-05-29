@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello QuizFormController!{% endblock %}
+
+{% block body %}
+    <div class="mt-5">
+     <div id="header" class="w-full border border-slate-800 dark:border-slate-200 rounded-md p-8 flex flex-row justify-between ">
+      <div>
+       <h2 class="text-xl">{{ quiz.title }}</h2>
+       <p class="text-base">{{ quiz.description }}</p>
+      </div>
+      <div id="timeBlock">
+       <h2>Temps : </h2>
+       <p id="time">{{quiz.time}} secondes</p>
+       <p id="timer" style="display: none;"><span id="timerSeconds">00</span> secondes restantes !</p>
+      </div>
+      <div id="endQuiz" style="display: none;">
+       <h2>Quiz terminé</h2>
+       <p>Félicitations</p>
+      </div>
+     </div>
+     <div id="finish" class="w-full border border-slate-800 dark:border-slate-200 rounded-md p-8 flex flex-row justify-center bg-red-500 content-center" style="display: none;">
+      <div class="text-center">
+       <h2 class="text-xl">Quiz terminé</h2>
+       <h3 class="text-xl">Dommage, vous y étiez presque !</h3>
+       <a class="text-sm underline" href="/quiz">Retour</a>
+      </div>
+     </div>
+     <div id="notFinish" class="w-full border border-slate-800 dark:border-slate-200 rounded-md p-8 flex flex-row justify-center bg-green-400 content-center" style="display: none;">
+      <div class="text-center">
+        <h2 class="text-xl">Quiz terminé</h2>
+       <h3 class="text-xl">Féliciations !</h3>
+       <a class="text-sm underline" href="/quiz">Retour</a>
+      </div>
+     </div>
+
+     <div class="m-3" id="answerBlock" style="display: none;">
+      <label>
+       Réponse : 
+       <input type="text" id="answer" class="rounded dark:text-black"/>
+       <p><span id="findAnswer">0</span> sur <span id="answerNumber">0</span> trouvés</p>
+      </label>
+      <div id="buttonStop" >
+        <button class="btn btn-secondary">Abandonner</button>
+      </div>
+     </div>
+     
+     <div class="m-3" id="buttonStart" >
+      <button class="btn btn-primary">Commencer</button>
+     </div>
+
+     <div class="py-5 flex items-center flex-col">
+        {% for question in quiz.questions %}
+         <div class="flex flex-row justify-between m-1 ">
+          {% if question.title %}
+          <div class="w-40 text-center p-3 border border-slate-800 dark:border-slate-200">
+           <p>{{question.title}}</p>
+          </div>
+          {% endif %}
+          <div class="w-40 text-center p-3 border border-slate-800 dark:border-slate-200">
+           <p class="hideAnswer answer wrongAnswer" id="{{ question.id }}">{{question.answer}}</p>
+          </div>
+         </div>
+        {% endfor %}
+     </div>
+
+
+    </div>
+
+{% endblock %}

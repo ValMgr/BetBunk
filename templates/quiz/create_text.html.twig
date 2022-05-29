@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %} {% block title %}Create quiz{% endblock %} {%
+block body %}
+<main class="container py-5">
+  <h2 class="text-lg font-bold">Paramètres du quiz:</h2>
+  <div>
+    {{ form_start(QuizForm) }}
+    <div class="flex columns-2 gap-5">
+      <div class="w-6/12">
+        {{
+          form_row(QuizForm.title, {
+            attr: { class: "form-field" },
+            label: "Titre (*) : "
+          })
+        }}
+      </div>
+      <div class="w-6/12">
+        {{
+          form_row(QuizForm.time, {
+            attr: { class: "form-field" },
+            label: "Temps en secondes (*) : "
+          })
+        }}
+      </div>
+    </div>
+
+    {{
+      form_row(QuizForm.description, {
+        attr: { class: "form-field" },
+        label: "Description (*) : "
+      })
+    }}
+
+    <div class="flex columns-2 gap-5">
+      <div class="w-6/12">
+        {{
+          form_row(QuizForm.thumbnail, {
+            attr: { class: "form-field" },
+            label: "Miniature (*) : "
+          })
+        }}
+      </div>
+      <div class="w-6/12">
+        {{
+          form_row(QuizForm.image, {
+            attr: { class: "form-field" },
+            label: "Image : "
+          })
+        }}
+      </div>
+    </div>
+
+    <h2 class="text-lg font-bold my-3">Questions:</h2>
+
+    <ul
+      class="questions"
+      data-index="{{ QuizForm.questions|length > 0 ? QuizForm.questions|last.vars.name + 1 : 0 }}"
+      data-prototype="{{ form_widget(QuizForm.questions.vars.prototype)|e('html_attr') }}"
+    >
+      {% for question in QuizForm.questions %}
+      <li>{{ form_row(question) }}</li>
+      {% endfor %}
+    </ul>
+
+    <div>
+      <button
+        type="button"
+        class="add_item_link btn btn-secondary"
+        data-collection-holder-class="questions"
+      >
+        Crée une question
+      </button>
+    </div>
+
+    <div class="my-5">
+      <button class="btn btn-primary">Publier un quiz</button>
+    </div>
+
+    {{ form_end(QuizForm) }}
+  </div>
+</main>
+{% endblock %}

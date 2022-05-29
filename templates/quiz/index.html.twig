@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello QuizFormController!{% endblock %}
+
+{% block body %}
+
+    <a href="/quiz/create/type" class="btn btn-primary">Crée un quiz</a>
+
+    <div class="mt-5">
+        <h1 class="underline text-xl">Tous nos quizs :</h1>
+
+        {% for quiz in quizzes %}
+        <a href="/quiz/play/{{quiz.id}}" class="cardQuizz w-full">
+            <div>
+                <img src='{{ asset('uploads/thumbnails/' ~ quiz.thumbnailName )}}' alt='{{ quiz.title }}'/>
+            </div> 
+            <div class="w-3/4">
+                <h3>{{ quiz.title }}</h3>
+                <p>{{ quiz.description }}</p>
+            </div>
+        </a>
+            
+        {% endfor %}
+
+
+    </div>
+
+{% endblock %}
