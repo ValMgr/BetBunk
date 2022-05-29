@@ -12,56 +12,40 @@
 
     <div class="w-64 h-36 bg-slate-100 dark:bg-dark-300 flex flex-col justify-center items-center p-8 rounded-lg">
         <h2 class="font-bold">Quizz</h2>
-        <p>XX quizz sur note site</p>
+        <p>{{numberOfQuiz}} quizz sur note site</p>
     </div>
 </div>
 
 <div class="mb-10">
     <div>
-        <h2 class="font-bold">Notre meilleur Quizz</h2>
+        <h2 class="font-bold">Un Quiz aléatoire</h2>
     </div>
-    <a href="#" class="cardQuizz">
-        <div>
-            <img src="https://placebear.com/200/200"/>
-        </div>
-        <div>
-            <h3>Title</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis.</p>
-        </div>
-    </a>
+    <a href="/quiz/play/{{randomQuiz.id}}" class="cardQuizz w-3/4 max-w-3xl">
+            <div>
+                <img src='{{randomQuiz.thumbnail}}' alt='{{ randomQuiz.title }}'/>
+            </div>
+            <div>
+                <h3>{{ randomQuiz.title }}</h3>
+                <p>{{ randomQuiz.description }}</p>
+            </div>
+        </a>
 </div>
 
 <div class="mb-10">
     <div>
         <h2 class="font-bold">Quelques Quizz</h2>
     </div>
-    <a href="#" class="cardQuizz">
-        <div>
-            <img src="https://placebear.com/200/200"/>
-        </div>
-        <div>
-            <h3>Title</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis.</p>
-        </div>
-    </a>
-    <a href="#" class="cardQuizz">
-        <div>
-            <img src="https://placebear.com/200/200"/>
-        </div>
-        <div>
-            <h3>Title</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis.</p>
-        </div>
-    </a>
-    <a href="#" class="cardQuizz">
-        <div>
-            <img src="https://placebear.com/200/200"/>
-        </div>
-        <div>
-            <h3>Title</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis.</p>
-        </div>
-    </a>
+    {% for quiz in quizzes | slice(0, 2) %}
+        <a href="/quiz/play/{{quiz.id}}" class="cardQuizz w-3/4 max-w-3xl">
+            <div>
+                <img src='{{quiz.thumbnail}}' alt='{{ quiz.title }}'/>
+            </div>
+            <div>
+                <h3>{{ quiz.title }}</h3>
+                <p>{{ quiz.description }}</p>
+            </div>
+        </a>
+    {% endfor %}
 </div>
 
 {% endblock %}

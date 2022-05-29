@@ -87,7 +87,7 @@ class Quiz
         return $this;
     }
 
-    public function getThumbnail(): ?File
+    public function getThumbnail(): ?string
     {
         return $this->thumbnail;
     }

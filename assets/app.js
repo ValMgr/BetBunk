@@ -11,6 +11,7 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 import { listenForNewQuestion } from './controllers/quizz_controller';
+import { answerFunction } from './controllers/answer_controller';
 
 function docReady(fn) {
     if (document.readyState === "complete" || document.readyState === "interactive") {
@@ -22,11 +23,13 @@ function docReady(fn) {
 
 docReady(() => {
 
-
     setMinHeight();
     listenForNewQuestion();
     const darkModeToggle = document.querySelector('#dark-toggle');
     darkModeToggle.addEventListener('click', toggleDarkMode.bind(darkModeToggle));
+
+    const timer = document.querySelector('#buttonStart');
+    timer.addEventListener('click', answerFunction);
 
     if (localStorage.theme === 'dark' ||
         (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {

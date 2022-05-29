@@ -97,4 +97,19 @@
     z-index: -1;
     border-radius: 5px;
   }
+
+  .showAnswer {
+    @apply block;
+  }
+  .hideAnswer {
+    @apply hidden;
+  }
+  .correctAnswer {
+    /* @apply text-green-500; */
+    color: #2ED628;
+  }
+  .wrongAnswer {
+    /* @apply text-pink-600; */
+    color: #F53519;
+  }
 }
