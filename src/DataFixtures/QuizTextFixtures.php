@@ -48,10 +48,10 @@ class QuizTextFixtures extends Fixture implements FixtureInterface, OrderedFixtu
 
         $q1_1 = new Question();
         $q1_1->setTitle('10 victoires');
-        $q1_1->setAnswer('Lewis Hamilton');
+        $q1_1->setAnswer('Max Verstappen');
         $q1_2 = new Question();
         $q1_2->setTitle('8 victoires');
-        $q1_2->setAnswer('Max Verstappen');
+        $q1_2->setAnswer('Lewis Hamilton');
         $q1_3 = new Question();
         $q1_3->setTitle('1 victoire');
         $q1_3->setAnswer('Sergio Perez');
