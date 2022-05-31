@@ -1,6 +1,6 @@
 
 const answersElements = Array.from(document.getElementsByClassName("answer"));
-const answers = answersElements.map(a => sanitizeString(a.innerHTML));
+let answers = answersElements.map(a => sanitizeString(a.innerHTML));
 let finalCollection = 0;
 
 function sanitizeString(str){
@@ -54,6 +54,7 @@ export function answerFunction() {
       finalCollection++;
       inputAnswer.value = '';
       const element = answersElements[answers.indexOf(input)];
+      answers = answers.filter(a => a !== input);
       element.classList.remove('hideAnswer');
       element.classList.remove('wrongAnswer');
       findAnswer.innerText = finalCollection;  
